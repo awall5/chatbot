@@ -1,42 +1,62 @@
-# Azure OpenAI Chatbot with Python & Flask
+# 🗨 Real-Time Azure OpenAI Chatbot (Python + Flask)
 
-A simple real-time chatbot built with **Python (Flask)** and **Azure OpenAI GPT**.
+A simple yet powerful real-time chatbot built with **Azure OpenAI (gpt-35-turbo)**, **Python Flask**, and **JavaScript**.  
+This project demonstrates how to integrate Azure’s AI models into a web-based interface with conversation memory, token tracking, and cost estimation.
 
 ---
 
 ## 🚀 Features
-- Real-time chat with GPT model hosted on Azure
-- Web interface (HTML + JavaScript)
-- Environment variables for security
-- Easy to extend with conversation memory
+- Real-time chatbot interface (Flask + JavaScript)
+- Context-aware conversation memory
+- Token usage tracking per request
+- Easy Azure OpenAI API integration
+- Fully customizable UI
+- Maintains conversation history across messages
+- Shows token usage for transparency
+- Cost calculation for each request
 
 ---
 
 ## 🛠 Tech Stack
-- Python 3
-- Flask
-- HTML, CSS, JavaScript
-- Azure OpenAI Service
-- dotenv for environment variables
+- **Backend:** Python, Flask
+- **Frontend:** HTML, CSS, JavaScript
+- **AI Service:** Azure OpenAI Service (`gpt-35-turbo`)
+- **Hosting (Optional):** Azure App Service
+- **Version Control:** Git & GitHub
 
 ---
 
+ 
+
 ## 📂 Project Structure
 
+chatbot/
+│
+├── app.py # Flask backend
+├── templates/
+│ └── index.html # Frontend UI
+├── static/
+│ ├── style.css # Chat styling
+│ └── script.js # Chat frontend logic
+├── .env # API keys and configs
+└── README.md # Documentation
 
-[ User Browser ]
-      │  (message: "Hello")
-      ▼
-[ index.html + JS ]
-      │  HTTP POST /chat
-      ▼
-[ Flask Server (app.py) ]
-      │  AzureOpenAI SDK call
-      ▼
-[ Azure OpenAI API ]
-      │  (Processes with gpt-35-turbo)
-      ▼
-[ Flask Server ]
-      │  JSON { reply: "Hi there!" }
-      ▼
-[ User Browser ]
+
+
+flowchart TD
+    A[User Browser] -->|Types message| B[JavaScript fetch /chat]
+    B --> C[Flask Backend]
+    C -->|Send message history| D[Azure OpenAI API]
+    D -->|AI Reply + Token Usage| C
+    C -->|Send reply JSON| B
+    B -->|Update UI + Show tokens| A
+
+
+💰 Cost Estimation
+Azure OpenAI charges per 1,000 tokens.
+
+Example for gpt-35-turbo:
+
+Type	Price (per 1K tokens)
+Input (Prompt)	$0.0015
+Output (Completion)	$0.0020
